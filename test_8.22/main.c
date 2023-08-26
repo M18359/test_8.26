@@ -1,18 +1,27 @@
 #include <stdio.h>
 #include <string.h>
 
-
+int my_strlen(char* str)
+{
+	int sum = 0;
+	while(*str != '\0')
+	{
+		sum++;
+		str += 1;
+	}
+	return sum;
+}
 //逆序递归实现
 void re_str(char* str)
 {
 	//abcdef--先让af呼唤再向里靠拢
 	char tmp = *str;
-	int len = strlen(str);
+	int len = my_strlen(str);
 	
 	*str = *(str + len - 1);
 	//通过把最右侧字符变为\0实现字符串向里靠拢
 	*(str + len - 1) = '\0';
-	if(strlen(str+1)>=2)
+	if(my_strlen(str+1)>=2)
 		re_str(str + 1);
 	*(str + len - 1) = tmp;
 
