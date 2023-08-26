@@ -11,22 +11,33 @@ int my_strlen(char* str)
 	}
 	return sum;
 }
-//逆序递归实现
-void re_str(char* str)
+//逆序递归实现2
+void re_str2(char arr[], int left, int right)
 {
-	//abcdef--先让af呼唤再向里靠拢
-	char tmp = *str;
-	int len = my_strlen(str);
-	
-	*str = *(str + len - 1);
-	//通过把最右侧字符变为\0实现字符串向里靠拢
-	*(str + len - 1) = '\0';
-	if(my_strlen(str+1)>=2)
-		re_str(str + 1);
-	*(str + len - 1) = tmp;
-
-	
+	char tmp = 0;
+	tmp = arr[left];
+	arr[left] = arr[right];
+	arr[right] = tmp;
+	if(left <= right)
+	{
+		re_str2(arr, left + 1, right - 1);
+	}
 }
+
+//逆序递归实现1
+//void re_str(char* str)
+//{
+//	//abcdef--先让af呼唤再向里靠拢
+//	char tmp = *str;
+//	int len = my_strlen(str);
+//	
+//	*str = *(str + len - 1);
+//	//通过把最右侧字符变为\0实现字符串向里靠拢
+//	*(str + len - 1) = '\0';
+//	if(my_strlen(str+1)>=2)
+//		re_str(str + 1);
+//	*(str + len - 1) = tmp;
+//}
 //逆序排序
 //void reserve_string(char arr[],int len)
 //{
@@ -46,9 +57,14 @@ int main()
 	len = strlen(arr);
 	reserve_string(arr,len);
 	printf("%s", arr);*/
-	re_str(arr);
-	printf("%s", arr); 
 
+	/*re_str(arr);
+	printf("%s", arr); */
+
+	int left = 0;
+	int right = my_strlen(arr) - 1;
+	re_str2(arr, left, right);
+	printf("%s", arr);
 	return 0;
 }
 
