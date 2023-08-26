@@ -1,28 +1,77 @@
 #include <stdio.h>
 #include <string.h>
+#define _CRT_SECURE_NO_WARNINGS 1
 
-int my_strlen(char* str)
+
+//递归实现n的k次方
+double Pow(int n, int k)
 {
-	int sum = 0;
-	while(*str != '\0')
-	{
-		sum++;
-		str += 1;
-	}
-	return sum;
+	//k>1
+	//n*P(n,k-1)--n*n*P(n,k-2)---n*n...P(n,1)---n*n...n
+	//k=0---1
+	//k<0---1/pow()
+	if (k >= 1)
+		return n * Pow(n, k - 1);
+	else if (k == 0)
+		return 1;
+	else
+		return 1.0 / Pow(n,-k);
 }
-//逆序递归实现2
-void re_str2(char arr[], int left, int right)
+int main()
 {
-	char tmp = 0;
-	tmp = arr[left];
-	arr[left] = arr[right];
-	arr[right] = tmp;
-	if(left <= right)
-	{
-		re_str2(arr, left + 1, right - 1);
-	}
+	int n = 0;
+	int k = 0;
+	scanf("%d %d", &n, &k);
+	double ret = Pow(n, k);
+	printf("%f", ret);
+	return 0;
 }
+
+
+//int Digitsum(unsigned int n)
+//{
+//	//D1234---D123 +4---D12 +3 +4--D1 +2 +3 +4--1+2+3+4
+//	if (n >= 10)
+//		return n % 10 + Digitsum(n / 10);
+//	else
+//		return n;
+//}
+////输入一个数，计算其各位数之和
+//int main()
+//{
+//	unsigned int n = 0;
+//	scanf("%u", &n);
+//	int ret = Digitsum(n);
+//	printf("%d", ret);
+//	return 0;
+//}
+
+
+
+
+
+//int my_strlen(char* str)
+//{
+//	int sum = 0;
+//	while(*str != '\0')
+//	{
+//		sum++;
+//		str += 1;
+//	}
+//	return sum;
+//}
+////逆序递归实现2
+//void re_str2(char arr[], int left, int right)
+//{
+//	char tmp = 0;
+//	tmp = arr[left];
+//	arr[left] = arr[right];
+//	arr[right] = tmp;
+//	if(left <= right)
+//	{
+//		re_str2(arr, left + 1, right - 1);
+//	}
+//}
 
 //逆序递归实现1
 //void re_str(char* str)
@@ -50,23 +99,23 @@ void re_str2(char arr[], int left, int right)
 //		arr[len - 1 - i] = tmp;
 //	}
 //}
-int main()
-{
-	char arr[] = "abcdefg";
-	/*int len = 0;
-	len = strlen(arr);
-	reserve_string(arr,len);
-	printf("%s", arr);*/
-
-	/*re_str(arr);
-	printf("%s", arr); */
-
-	int left = 0;
-	int right = my_strlen(arr) - 1;
-	re_str2(arr, left, right);
-	printf("%s", arr);
-	return 0;
-}
+//int main()
+//{
+//	char arr[] = "abcdefg";
+//	/*int len = 0;
+//	len = strlen(arr);
+//	reserve_string(arr,len);
+//	printf("%s", arr);*/
+//
+//	/*re_str(arr);
+//	printf("%s", arr); */
+//
+//	int left = 0;
+//	int right = my_strlen(arr) - 1;
+//	re_str2(arr, left, right);
+//	printf("%s", arr);
+//	return 0;
+//}
 
 
 //int main()
